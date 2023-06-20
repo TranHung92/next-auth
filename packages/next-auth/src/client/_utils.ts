@@ -42,6 +42,7 @@ export async function fetchData<T = any>(
         "Content-Type": "application/json",
         ...(req?.headers?.cookie ? { cookie: req.headers.cookie } : {}),
       },
+      credentials: 'include',
     }
 
     if (req?.body) {

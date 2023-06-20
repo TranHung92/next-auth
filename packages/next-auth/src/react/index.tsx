@@ -261,6 +261,7 @@ export async function signIn<
       callbackUrl,
       json: true,
     }),
+    credentials: 'include'
   })
 
   const data = await res.json()
@@ -299,7 +300,7 @@ export async function signOut<R extends boolean = true>(
 ): Promise<R extends true ? undefined : SignOutResponse> {
   const { callbackUrl = window.location.href } = options ?? {}
   const baseUrl = apiBaseUrl(__NEXTAUTH)
-  const fetchOptions = {
+  const fetchOptions: RequestInit = {
     method: "post",
     headers: {
       "Content-Type": "application/x-www-form-urlencoded",
@@ -310,6 +311,7 @@ export async function signOut<R extends boolean = true>(
       callbackUrl,
       json: true,
     }),
+    credentials: 'include'
   }
   const res = await fetch(`${baseUrl}/signout`, fetchOptions)
   const data = await res.json()
